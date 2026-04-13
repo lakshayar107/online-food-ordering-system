@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: food-app
-        image: lakshayar107/food-order-app
+        image: lakshayar107/food-order-app:latest
         ports:
         - containerPort: 8080
 

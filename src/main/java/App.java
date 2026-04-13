@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class App {
 
-    static Map<String, Integer> menu = new HashMap<>();
+    private static Map<String, Integer> menu = new HashMap<>();
 
     static {
         menu.put("pizza", 10);
@@ -12,17 +12,28 @@ public class App {
     }
 
     public static boolean placeOrder(String item, int quantity) {
+        if (item == null || item.isEmpty()) {
+            return false;
+        }
         if (!menu.containsKey(item)) {
-            return false; // invalid item
+            return false;
         }
         if (quantity <= 0) {
-            return false; // invalid quantity
+            return false;
         }
-        return true; // success
+        return true;
+    }
+
+    public static int calculatePrice(String item, int quantity) {
+        if (!menu.containsKey(item) || quantity <= 0) {
+            return 0;
+        }
+        return menu.get(item) * quantity;
     }
 
     public static void main(String[] args) {
-        System.out.println(placeOrder("pizza", 2));  // true
-        System.out.println(placeOrder("cake", 1));   // false
+        System.out.println("Order 1: " + placeOrder("pizza", 2));
+        System.out.println("Order 2: " + placeOrder("cake", 1));
+        System.out.println("Total Price: " + calculatePrice("pizza", 2));
     }
 }
